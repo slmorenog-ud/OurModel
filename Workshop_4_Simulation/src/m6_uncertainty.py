@@ -193,12 +193,12 @@ def plot_uncertainty_analysis(mean_predictions, std_predictions, lower_bound, up
         'uncertainty': std_predictions
     })
     
-    df_boxplot.boxplot(column='uncertainty', by='prediction_range', ax=ax4)
+    # Use seaborn boxplot for better control over title
+    sns.boxplot(data=df_boxplot, x='prediction_range', y='uncertainty', ax=ax4)
     ax4.axhline(y=INSTABILITY_THRESHOLD, color='red', linestyle='--')
     ax4.set_xlabel('Rango de Predicción')
     ax4.set_ylabel('Incertidumbre')
     ax4.set_title('Incertidumbre por Rango de Predicción')
-    plt.suptitle('')  # Remover título automático de boxplot
     
     plt.tight_layout()
     

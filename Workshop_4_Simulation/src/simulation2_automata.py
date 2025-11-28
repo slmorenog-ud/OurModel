@@ -235,15 +235,15 @@ def plot_automata_evolution(ca, save_path=None):
     n_history = len(ca.history)
     steps_to_show = [0, n_history//4, n_history//2, 3*n_history//4, n_history-1]
     
-    # Gráficos de grilla en diferentes pasos
+    # Gráficos de grilla en diferentes pasos (5 slots: positions 0-4 in 2x3 grid)
+    # Layout: [0,0], [0,1], [0,2], [1,0], [1,1] for steps, [1,2] for evolution
+    plot_positions = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
     for idx, step in enumerate(steps_to_show[:5]):
-        if idx < 5:
-            row, col = idx // 3, idx % 3
-            if row < 2:
-                ax = axes[row, col]
-                im = ax.imshow(ca.history[step], cmap=cmap, vmin=0, vmax=2)
-                ax.set_title(f'Paso {step}')
-                ax.axis('off')
+        row, col = plot_positions[idx]
+        ax = axes[row, col]
+        im = ax.imshow(ca.history[step], cmap=cmap, vmin=0, vmax=2)
+        ax.set_title(f'Paso {step}')
+        ax.axis('off')
     
     # Gráfico de evolución temporal
     ax_evolution = axes[1, 2]
